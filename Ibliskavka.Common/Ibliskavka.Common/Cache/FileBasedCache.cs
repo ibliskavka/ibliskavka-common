@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Ibliskavka.Common
+namespace Ibliskavka.Common.Cache
 {
     /// <summary>
     /// This is a simple implementation of an object cache. The objects are cached on the file system and memory and refreshed from from the source when the file is deleted.

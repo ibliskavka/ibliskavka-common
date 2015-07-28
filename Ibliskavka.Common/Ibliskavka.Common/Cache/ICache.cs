@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ibliskavka.Common
+namespace Ibliskavka.Common.Cache
 {
     /// <summary>
     /// Implement this interface with your memory cache of choice.

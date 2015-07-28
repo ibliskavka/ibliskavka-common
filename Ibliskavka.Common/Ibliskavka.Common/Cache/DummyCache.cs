@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ibliskavka.Common
+namespace Ibliskavka.Common.Cache
 {
     /// <summary>
     /// If you dont want the FileBasedCache object to store data in a memory cache (file only), pass new DummyCache() to the constructor.

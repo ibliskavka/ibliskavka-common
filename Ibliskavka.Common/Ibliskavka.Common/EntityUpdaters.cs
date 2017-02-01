@@ -46,7 +46,7 @@ namespace Ibliskavka.Common
         }
 
         /// <summary>
-        /// This is a updater overide that implements special handling for strings.
+        /// This is a updater override that implements special handling for strings.
         /// </summary>
         public static bool Update<T>(T target, Expression<Func<T, string>> outExpr, string newValue)
         {
@@ -125,6 +125,41 @@ namespace Ibliskavka.Common
             result = default(T);
             return false;
 
+        }
+
+        /// <summary>
+        /// This is a specialized method I used when working with SharePoint .This method updates a lookup field based on a key and a locator.
+        /// The main idea is to not set a value on a record unless it is different. This way we are not resetting the ModifiedBy and ModifiedOn column the record.
+        /// </summary>
+        /// <typeparam name="T">Target object type</typeparam>
+        /// <param name="target">Target object</param>
+        /// <param name="outExpr">Target property</param>
+        /// <param name="key">The "value" of the lookup</param>
+        /// <param name="locator">Function reference to locate the LookupId based on the key</param>
+        /// <returns></returns>
+        public static bool UpdateLookup<T>(this T target, Expression<Func<T, int?>> outExpr, string key, Func<string, int?> locator)
+        {
+            var member = ((PropertyInfo)((MemberExpression)outExpr.Body).Member).Name;
+
+            int? lookupId;
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                //Key is blank, setting record to null
+                lookupId = null;
+            }
+            else
+            {
+                try
+                {
+                    lookupId = locator(key);
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException("Unable to locate lookup for " + member + " with value: " + key, e);
+                }
+            }
+
+            return Update(target, outExpr, lookupId);
         }
     }
 }

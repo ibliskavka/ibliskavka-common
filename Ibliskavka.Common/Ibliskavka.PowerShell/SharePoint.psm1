@@ -206,3 +206,34 @@ Function Set-OSCMaximumFileSize
         Write-Error $_
     }
 }
+
+<#
+	Replace-CustomActionUrl
+	Replaces a string in the custom action URLs. Useful when moving environments or servers
+#>
+function Replace-CustomActionUrl([Microsoft.SharePoint.SPList]$list, [String]$match, [String]$replace){
+    foreach($x in $list.UserCustomActions){
+        Write-Host "Updating custom action URL on $($list.Title) from $match to $replace"
+        
+        $x.Url = $x.Url.Replace($match, $replace)
+        
+        if($x.CommandUIExtension -ne $null){
+            $x.CommandUIExtension = $x.CommandUIExtension.Replace($match, $replace)
+            $x.CommandUIExtension = $x.CommandUIExtension.Replace($match, $replace)
+        }
+        $x.Update()        
+    }
+}
+
+<#
+	Replace-CustomActionImageUrl
+	Replaces a string in the custom action Image URL. Useful when moving environments, servers, or simply updating the image
+#>
+function Replace-CustomActionImageUrl([Microsoft.SharePoint.SPList]$list, [String]$match, [String]$replace){
+    foreach($x in $list.UserCustomActions){
+        Write-Host "Replacing custom action image URL on $($list.Title) from $match to $replace"
+        
+        $x.ImageUrl = $x.ImageUrl.Replace($match, $replace)
+        $x.Update()        
+    }
+}

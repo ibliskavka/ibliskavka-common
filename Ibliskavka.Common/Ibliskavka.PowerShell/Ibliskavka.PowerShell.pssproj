@@ -27,6 +27,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Common.psm1" />
+    <Compile Include="FileSystem.psm1" />
     <Compile Include="SharePoint.psm1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

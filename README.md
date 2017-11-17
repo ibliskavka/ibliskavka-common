@@ -1,2 +1,4 @@
 # ibliskavka-common
-This is a collection of helper classes that I use in development. Mostly this is for personal reference but feel free to download, extend or as me about anything.
+A collection of helper classes that I use in development. It's mostly for personal reference but feel free to download, extend or ask me about anything.
+
+ - 11/17/2017 Added SharePoint 2010 PowerShell functions
